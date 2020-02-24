@@ -19,7 +19,6 @@ public class ArrayList<T> implements List<T> {
         this.array = (T[]) new Object[STANDARD_SIZE];
     }
 
-
     @Override
     public int size() {
         if (isEmpty()) {
