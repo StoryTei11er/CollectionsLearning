@@ -4,13 +4,11 @@ import java.util.*;
 
 
 public class ArrayList<T> implements List<T> {
-    private T[] array;
-    private int size = 0;
     private static final int STANDARD_SIZE = 10;
+    private T[] array;
 
     public ArrayList(int i) {
         if (i == 0) {
-            throw new RuntimeException("ТЫ ДОЛБОЁБ, САМ ДУРАК");
         }
         this.array = (T[]) new Object[i];
     }
@@ -19,29 +17,26 @@ public class ArrayList<T> implements List<T> {
         this.array = (T[]) new Object[STANDARD_SIZE];
     }
 
+    //Сделал.
     @Override
     public int size() {
-        if (isEmpty()) {
-            System.out.println("Size is 0");
-            return 0;
-        } else {
-            System.out.println("Size is: " + array.length);
-            return array.length;
-        }
+        System.out.println(array[0] + "индекс 0");
+        System.out.println(array[1] + "интедкс 1");
+
+        return array.length;
     }
 
-
+    //Сделал.
     @Override
     public boolean isEmpty() {
         if (array.length != 0) {
-            System.out.println("Lis is not empty ");
             return false;
         } else {
-            System.out.println("Lis is empty ");
             return true;
         }
     }
 
+    //Сделал.
     @Override
     public boolean contains(Object o) {
         return indexOf(0) == 0;
@@ -52,6 +47,7 @@ public class ArrayList<T> implements List<T> {
         return null;
     }
 
+    //Сделал.
     @Override
     public Object[] toArray() {
         return new Object[0];
@@ -62,17 +58,35 @@ public class ArrayList<T> implements List<T> {
         return null;
     }
 
+    //Сделал.
     @Override
-    public boolean add(T t) {
-        T[] temp = Arrays.copyOf(array, array.length + 1);
-        temp[array.length] = t;
-        array = temp;
-        return true;
+    public T set(int index, T element) {
+        array[index] = element;
+        return array[index];
+    }
+
+    //Сделал.
+    @Override
+    public void add(int index, T element) {
+        array[index] = element;
     }
 
     @Override
+    public boolean add(T t) {
+        return true;
+    }
+
+    //Сделал.
+    @Override
+    public T remove(int index) {
+        array[index] = null;
+        return array[index];
+    }
+
+    //Сделал.
+    @Override
     public boolean remove(Object o) {
-        return false;
+        return indexOf(0) == 0;
     }
 
     @Override
@@ -101,12 +115,15 @@ public class ArrayList<T> implements List<T> {
         return false;
     }
 
+    //Сделал.
     @Override
     public void clear() {
-
-
+        for (int i = 0; i < array.length; i++) {
+            array[i] = null;
+        }
     }
 
+    //Сделал.
     @Override
     public T get(int index) {
         return (T) array[index];
@@ -114,24 +131,8 @@ public class ArrayList<T> implements List<T> {
 
 
     @Override
-    public T set(int index, T element) {
-        array[index] = element;
-        return array[index];
-    }
-
-
-    @Override
-    public void add(int index, T element) {
-
-    }
-
-    @Override
-    public T remove(int index) {
-        return null;
-    }
-
-    @Override
     public int indexOf(Object o) {
+
         return 0;
     }
 

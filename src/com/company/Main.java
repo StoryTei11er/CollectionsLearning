@@ -6,25 +6,28 @@ public class Main {
 
     public static void main(String[] args) {
 
-        List<Object> arrayList =  new ArrayList<>();
-        List<Object> arrayList1 =  new ArrayList<>(0);
+        List<Object> arrayList = new ArrayList<>(2);
 
-        arrayList.add(1);
-        arrayList.add(66);
-        arrayList.size();
-        arrayList.isEmpty();
-        Object t = arrayList.get(0);
-        Object t1 = arrayList.contains("1");
+//      Метод size() работает
+//      int arrayListSize = arrayList.size();
+//      System.out.println(arrayListSize);
 
-        System.out.println(t);
-        System.out.println(t1);
+//      Метод isEmpty() работает
+//      boolean arrayListIsEmpty = arrayList.isEmpty();
+//      System.out.println(arrayListIsEmpty);
 
-
-//        Object t2 = arrayList.set(2,1);
-
-//        System.out.println(t2);
+//      Метод add() не работает. При попытке записать значение перезамписывается первыый елемент а не следующий.
+        boolean arrayListAdd = arrayList.add(11);
+        arrayList.add(22);
 
 
+        System.out.println(arrayListAdd);
 
+        System.out.println(arrayList.size());
+
+
+//      Метод set() работает
+//      int arraySet = (int) arrayList.set(1,256);
+//      System.out.println(arraySet);
     }
 }
