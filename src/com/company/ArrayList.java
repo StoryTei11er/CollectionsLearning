@@ -7,6 +7,7 @@ public class ArrayList<T> implements List<T> {
     private static final int STANDARD_SIZE = 10;
     private T[] array;
 
+
     public ArrayList(int i) {
         if (i == 0) {
         }
@@ -17,12 +18,10 @@ public class ArrayList<T> implements List<T> {
         this.array = (T[]) new Object[STANDARD_SIZE];
     }
 
+
     //Сделал.
     @Override
     public int size() {
-        System.out.println(array[0] + "индекс 0");
-        System.out.println(array[1] + "интедкс 1");
-
         return array.length;
     }
 
@@ -71,8 +70,26 @@ public class ArrayList<T> implements List<T> {
         array[index] = element;
     }
 
+//    Сделал
     @Override
     public boolean add(T t) {
+        try {
+            for (int i = 0; i <= array.length; i++) {
+                if (array[i] == null) {
+                    array[i] = t;
+                    break;
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            T[] temp = Arrays.copyOf(array, (array.length * 3) / 2 + 1);
+            array = temp;
+            for (int i = 0; i <= array.length; i++) {
+                if (array[i] == null) {
+                    array[i] = t;
+                    break;
+                }
+            }
+        }
         return true;
     }
 
