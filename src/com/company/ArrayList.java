@@ -6,6 +6,7 @@ import java.util.*;
 public class ArrayList<T> implements List<T> {
     private static final int STANDARD_SIZE = 10;
     private T[] array;
+    private int index;
 
 
     public ArrayList(int i) {
@@ -52,11 +53,6 @@ public class ArrayList<T> implements List<T> {
         return new Object[0];
     }
 
-    @Override
-    public <T1> T1[] toArray(T1[] a) {
-        return null;
-    }
-
     //Сделал.
     @Override
     public T set(int index, T element) {
@@ -70,7 +66,7 @@ public class ArrayList<T> implements List<T> {
         array[index] = element;
     }
 
-//    Сделал
+    //Сделал
     @Override
     public boolean add(T t) {
         try {
@@ -91,6 +87,11 @@ public class ArrayList<T> implements List<T> {
             }
         }
         return true;
+    }
+
+    @Override
+    public <T1> T1[] toArray(T1[] a) {
+        return null;
     }
 
     //Сделал.
@@ -123,8 +124,10 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        return false;
-    }
+        return true;
+            }
+
+
 
     @Override
     public boolean retainAll(Collection<?> c) {
@@ -146,16 +149,30 @@ public class ArrayList<T> implements List<T> {
         return (T) array[index];
     }
 
-
+    //Сделал.
     @Override
     public int indexOf(Object o) {
-
-        return 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == o) {
+                this.index = i;
+            } else {
+                System.out.println("Такого елемента нет в массиве");
+                break;
+            }
+        }
+        return index;
     }
 
+    //  Сделал
     @Override
     public int lastIndexOf(Object o) {
-        return 0;
+        int lastIndex = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == o) {
+                lastIndex = i;
+            }
+        }
+        return lastIndex;
     }
 
     @Override
