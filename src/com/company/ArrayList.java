@@ -9,16 +9,19 @@ public class ArrayList<T> implements List<T> {
     private static final int STANDARD_SIZE = 10;
     private T[] array;
     private int index;
+    private int currentSize;
 
 
     public ArrayList(int i) {
         if (i == 0) {
         }
         this.array = (T[]) new Object[i];
+        this.currentSize = array.length;
     }
 
     public ArrayList() {
         this.array = (T[]) new Object[STANDARD_SIZE];
+        this.currentSize = array.length;
     }
 
 
@@ -51,15 +54,15 @@ public class ArrayList<T> implements List<T> {
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
-
+            int currentIndex = 0;
             @Override
             public boolean hasNext() {
-                return false;
+                return currentIndex < currentSize && array[currentIndex] != null;
             }
 
             @Override
             public T next() {
-                return null;
+                return array[currentIndex++];
             }
         };
     }
@@ -142,8 +145,7 @@ public class ArrayList<T> implements List<T> {
     @Override
     public boolean removeAll(Collection<?> c) {
         return true;
-            }
-
+    }
 
 
     @Override

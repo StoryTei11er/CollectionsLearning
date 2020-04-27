@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.Iterator;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -11,13 +13,13 @@ public class Main {
         arrayList.add(4);
         arrayList.add(5);
 
-        arrayList.clear();
-                arrayList.set(6,4);
-        System.out.println(arrayList.isEmpty());
-        for (int i = 0; i < arrayList.size(); i++){
-            System.out.println(arrayList.get(i));
+        Iterator listIterator = arrayList.iterator();
+        System.out.println(listIterator.hasNext());
+        System.out.println(listIterator.next());
+        System.out.println(listIterator.next());
+        System.out.println(listIterator.next());
         }
     }
 
-}
+
 
