@@ -4,6 +4,8 @@ import java.util.*;
 
 
 public class ArrayList<T> implements List<T> {
+
+
     private static final int STANDARD_SIZE = 10;
     private T[] array;
     private int index;
@@ -29,11 +31,15 @@ public class ArrayList<T> implements List<T> {
     //Сделал.
     @Override
     public boolean isEmpty() {
-        if (array.length != 0) {
-            return false;
-        } else {
-            return true;
+        boolean finderItem = false;
+        for (T i : array) {
+            if (i != null) {
+                finderItem = false;
+                break;
+            } else
+                finderItem = true;
         }
+        return finderItem;
     }
 
     //Сделал.
@@ -44,7 +50,18 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return null;
+        return new Iterator<T>() {
+
+            @Override
+            public boolean hasNext() {
+                return false;
+            }
+
+            @Override
+            public T next() {
+                return null;
+            }
+        };
     }
 
     //Сделал.
@@ -189,5 +206,6 @@ public class ArrayList<T> implements List<T> {
     public List<T> subList(int fromIndex, int toIndex) {
         return null;
     }
+
 }
 
