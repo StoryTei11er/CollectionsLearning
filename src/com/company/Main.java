@@ -12,7 +12,7 @@ public class Main {
         arrayList.add(5);
 
         arrayList.clear();
-//                arrayList.set(6,4);
+                arrayList.set(6,4);
         System.out.println(arrayList.isEmpty());
         for (int i = 0; i < arrayList.size(); i++){
             System.out.println(arrayList.get(i));
