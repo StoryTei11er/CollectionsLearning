@@ -25,13 +25,13 @@ public class ArrayList<T> implements List<T> {
     }
 
 
-    //Сделал.
+    // Сделал.
     @Override
     public int size() {
         return array.length;
     }
 
-    //Сделал.
+    // Сделал.
     @Override
     public boolean isEmpty() {
         boolean finderItem = false;
@@ -45,16 +45,18 @@ public class ArrayList<T> implements List<T> {
         return finderItem;
     }
 
-    //Сделал.
+    // Сделал.
     @Override
     public boolean contains(Object o) {
         return indexOf(0) == 0;
     }
 
+    // Сделал
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
             int currentIndex = 0;
+
             @Override
             public boolean hasNext() {
                 return currentIndex < currentSize && array[currentIndex] != null;
@@ -62,31 +64,36 @@ public class ArrayList<T> implements List<T> {
 
             @Override
             public T next() {
-                return array[currentIndex++];
+                if (currentIndex != array.length) {
+                    return array[currentIndex++];
+                } else {
+                    String iteratorNextMessage = "No more element in array, its end!";
+                    return (T) iteratorNextMessage;
+                }
             }
         };
     }
 
-    //Сделал.
+    // Сделал.
     @Override
     public Object[] toArray() {
         return new Object[0];
     }
 
-    //Сделал.
+    // Сделал.
     @Override
     public T set(int index, T element) {
         array[index] = element;
         return array[index];
     }
 
-    //Сделал.
+    // Сделал.
     @Override
     public void add(int index, T element) {
         array[index] = element;
     }
 
-    //Сделал
+    // Сделал
     @Override
     public boolean add(T t) {
         try {
@@ -114,14 +121,14 @@ public class ArrayList<T> implements List<T> {
         return null;
     }
 
-    //Сделал.
+    // Сделал.
     @Override
     public T remove(int index) {
         array[index] = null;
         return array[index];
     }
 
-    //Сделал.
+    // Сделал.
     @Override
     public boolean remove(Object o) {
         return indexOf(0) == 0;
@@ -154,7 +161,7 @@ public class ArrayList<T> implements List<T> {
         return false;
     }
 
-    //Сделал.
+    // Сделал.
     @Override
     public void clear() {
         for (int i = 0; i < array.length; i++) {
@@ -162,13 +169,13 @@ public class ArrayList<T> implements List<T> {
         }
     }
 
-    //Сделал.
+    // Сделал.
     @Override
     public T get(int index) {
         return (T) array[index];
     }
 
-    //Сделал.
+    // Сделал.
     @Override
     public int indexOf(Object o) {
         for (int i = 0; i < array.length; i++) {
@@ -196,7 +203,69 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public ListIterator<T> listIterator() {
-        return null;
+        return new ListIterator<T>() {
+            int currentIndex = 0;
+
+            @Override
+            public boolean hasNext() {
+                return currentIndex < currentSize && array[currentIndex] != null;
+            }
+
+            @Override
+            public T next() {
+                if (currentIndex != array.length) {
+                    return array[currentIndex++];
+                } else {
+                    String iteratorNextMessage = "No more element in array, its end!";
+                    return (T) iteratorNextMessage;
+                }
+            }
+
+            @Override
+            public boolean hasPrevious() {
+                if (currentIndex == 0) {
+                    return false;
+                } else
+                    return currentIndex < currentSize && array[currentIndex] != null;
+            }
+
+            @Override
+            public T previous() {
+                return null;
+            }
+
+            @Override
+            public int nextIndex() {
+                return 0;
+            }
+
+            @Override
+            public int previousIndex() {
+                return 0;
+            }
+
+            @Override
+            public void remove() {
+                if (currentIndex != 0) {
+                    currentIndex--;
+                    array[currentIndex] = null;
+                    currentIndex++;
+                } else {
+                    System.out.println("You not use 'next()' or 'previous()' early, you cant remove element!");
+                }
+            }
+
+            @Override
+            public void set(T t) {
+                currentIndex--;
+                array[currentIndex] = t;
+                currentIndex++;
+            }
+
+            @Override
+            public void add(T t) {
+            }
+        };
     }
 
     @Override
