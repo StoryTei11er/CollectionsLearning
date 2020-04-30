@@ -213,46 +213,67 @@ public class ArrayList<T> implements List<T> {
 
             @Override
             public T next() {
-                if (currentIndex != array.length) {
-                    return array[currentIndex++];
-                } else {
-                    String iteratorNextMessage = "No more element in array, its end!";
-                    return (T) iteratorNextMessage;
+                try {
+                    if (currentIndex != currentSize) {
+                        return array[currentIndex++];
+                    } else {
+                        throw new NoSuchElementException("Array is end, this is your last element:");
+                    }
+                } catch (NoSuchElementException e) {
+                    System.out.println(e.getMessage());
+                    return array[currentIndex--];
                 }
             }
 
             @Override
             public boolean hasPrevious() {
+                int previouslyIndex = currentIndex - 1;
                 if (currentIndex == 0) {
                     return false;
-                } else
-                    return currentIndex < currentSize && array[currentIndex] != null;
+                } else return currentIndex > 0 && array[previouslyIndex] != null;
             }
+
 
             @Override
             public T previous() {
-                return null;
+                try {
+                    if (currentIndex > 0 && currentIndex != currentSize) {
+                        return array[currentIndex--];
+                    } else {
+                        throw new NoSuchElementException("Array haven't negative index, your first element is:");
+                    }
+                } catch (NoSuchElementException e) {
+                    System.out.println(e.getMessage());
+                    return array[currentIndex];
+                }
             }
 
             @Override
             public int nextIndex() {
-                return 0;
+                int nextIndex = currentIndex + 1;
+                return nextIndex;
             }
 
             @Override
             public int previousIndex() {
-                return 0;
+                int previousIndex = currentIndex - 1;
+                return previousIndex;
             }
 
             @Override
             public void remove() {
-                if (currentIndex != 0) {
-                    currentIndex--;
-                    array[currentIndex] = null;
-                    currentIndex++;
-                } else {
+                try {
+                } catch (IllegalStateException e) {
                     System.out.println("You not use 'next()' or 'previous()' early, you cant remove element!");
                 }
+//                if (currentIndex != 0) {
+//                    currentIndex--;
+//                    array[currentIndex] = null;
+//                    currentIndex++;
+//                } else {
+//                    System.out.println("You not use 'next()' or 'previous()' early, you cant remove element!");
+//
+//                }
             }
 
             @Override
