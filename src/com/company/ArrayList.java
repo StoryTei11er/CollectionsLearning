@@ -205,16 +205,23 @@ public class ArrayList<T> implements List<T> {
     public ListIterator<T> listIterator() {
         return new ListIterator<T>() {
             int currentIndex = 0;
+            int returnedElement = -1;
+            int usedNext = 0;
+            int usedPrevious = 0;
 
+            // Сделал
             @Override
             public boolean hasNext() {
                 return currentIndex < currentSize && array[currentIndex] != null;
             }
 
+            // Сделал
             @Override
             public T next() {
+                usedNext++;
                 try {
                     if (currentIndex != currentSize) {
+                        returnedElement++;
                         return array[currentIndex++];
                     } else {
                         throw new NoSuchElementException("Array is end, this is your last element:");
@@ -225,19 +232,24 @@ public class ArrayList<T> implements List<T> {
                 }
             }
 
+            // Сделал
             @Override
             public boolean hasPrevious() {
                 int previouslyIndex = currentIndex - 1;
                 if (currentIndex == 0) {
                     return false;
-                } else return currentIndex > 0 && array[previouslyIndex] != null;
+                } else
+                    return currentIndex > 0 && array[previouslyIndex] != null;
             }
 
 
+            // Сделал
             @Override
             public T previous() {
+                usedPrevious++;
                 try {
                     if (currentIndex > 0 && currentIndex != currentSize) {
+                        returnedElement = currentIndex;
                         return array[currentIndex--];
                     } else {
                         throw new NoSuchElementException("Array haven't negative index, your first element is:");
@@ -248,12 +260,14 @@ public class ArrayList<T> implements List<T> {
                 }
             }
 
+            // Сделал
             @Override
             public int nextIndex() {
                 int nextIndex = currentIndex + 1;
                 return nextIndex;
             }
 
+            // Сделал
             @Override
             public int previousIndex() {
                 int previousIndex = currentIndex - 1;
@@ -262,29 +276,42 @@ public class ArrayList<T> implements List<T> {
 
             @Override
             public void remove() {
-                try {
-                } catch (IllegalStateException e) {
-                    System.out.println("You not use 'next()' or 'previous()' early, you cant remove element!");
+                int returnedElement;
+                if (this.returnedElement >= 0) {
+                    returnedElement = this.returnedElement;
+                } else {
+                    returnedElement = 0;
                 }
-//                if (currentIndex != 0) {
-//                    currentIndex--;
-//                    array[currentIndex] = null;
-//                    currentIndex++;
-//                } else {
-//                    System.out.println("You not use 'next()' or 'previous()' early, you cant remove element!");
-//
-//                }
+
+                try {
+                    if (usedNext != 0 || usedPrevious != 0) {
+                        array[returnedElement] = null;
+                    } else {
+                        throw new IllegalStateException("You not use next() or previous() early");
+                    }
+                } catch (IllegalStateException e) {
+                    System.out.println(e.getMessage());
+                }
             }
 
             @Override
             public void set(T t) {
+                int returnedElement;
+                if (this.returnedElement >= 0) {
+                    returnedElement = this.returnedElement;
+                } else {
+                    returnedElement = 0;
+                }
+                array[returnedElement] = t;
+
+            }
+
+            //Сделал
+            @Override
+            public void add(T t) {
                 currentIndex--;
                 array[currentIndex] = t;
                 currentIndex++;
-            }
-
-            @Override
-            public void add(T t) {
             }
         };
     }

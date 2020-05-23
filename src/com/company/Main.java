@@ -13,13 +13,22 @@ public class Main {
         arrayList.add(3);
         arrayList.set(3, 4);
         arrayList.add(5);
+        arrayList.add(6);
+        arrayList.add(7);
 
         ListIterator listIterator = arrayList.listIterator();
 
-        System.out.println(listIterator.next());
-        System.out.println(listIterator.previousIndex() + " Previous");
-        System.out.println(listIterator.nextIndex() + " next");
-        System.out.println(listIterator.next());
+        listIterator.next();
+        listIterator.remove();
+
+
+
+
+
+
+
+
+
 
 
         System.out.println("=================================================================");
