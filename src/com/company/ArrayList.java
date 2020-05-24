@@ -204,10 +204,10 @@ public class ArrayList<T> implements List<T> {
     @Override
     public ListIterator<T> listIterator() {
         return new ListIterator<T>() {
-            int currentIndex = 0;
             int returnedElement = -1;
             int usedNext = 0;
             int usedPrevious = 0;
+            int currentIndex = 0;
 
             // Сделал
             @Override
@@ -274,6 +274,7 @@ public class ArrayList<T> implements List<T> {
                 return previousIndex;
             }
 
+            //Сделал
             @Override
             public void remove() {
                 int returnedElement;
@@ -294,6 +295,7 @@ public class ArrayList<T> implements List<T> {
                 }
             }
 
+            //Сделал
             @Override
             public void set(T t) {
                 int returnedElement;
@@ -316,15 +318,132 @@ public class ArrayList<T> implements List<T> {
         };
     }
 
+    //Сделал
     @Override
     public ListIterator<T> listIterator(int index) {
-        return null;
+        return new ListIterator<T>() {
+            int returnedElement = -1;
+            int usedNext = 0;
+            int usedPrevious = 0;
+            int currentIndex = index;
+
+            @Override
+            public boolean hasNext() {
+                return currentIndex < currentSize && array[currentIndex] != null;
+            }
+
+            // Сделал
+            @Override
+            public T next() {
+                usedNext++;
+                try {
+                    if (currentIndex != currentSize) {
+                        returnedElement++;
+                        return array[currentIndex++];
+                    } else {
+                        throw new NoSuchElementException("Array is end, this is your last element:");
+                    }
+                } catch (NoSuchElementException e) {
+                    System.out.println(e.getMessage());
+                    return array[currentIndex--];
+                }
+            }
+
+            // Сделал
+            @Override
+            public boolean hasPrevious() {
+                int previouslyIndex = currentIndex - 1;
+                if (currentIndex == 0) {
+                    return false;
+                } else
+                    return currentIndex > 0 && array[previouslyIndex] != null;
+            }
+
+
+            // Сделал
+            @Override
+            public T previous() {
+                usedPrevious++;
+                try {
+                    if (currentIndex > 0 && currentIndex != currentSize) {
+                        returnedElement = currentIndex;
+                        return array[currentIndex--];
+                    } else {
+                        throw new NoSuchElementException("Array haven't negative index, your first element is:");
+                    }
+                } catch (NoSuchElementException e) {
+                    System.out.println(e.getMessage());
+                    return array[currentIndex];
+                }
+            }
+
+            // Сделал
+            @Override
+            public int nextIndex() {
+                int nextIndex = currentIndex + 1;
+                return nextIndex;
+            }
+
+            // Сделал
+            @Override
+            public int previousIndex() {
+                int previousIndex = currentIndex - 1;
+                return previousIndex;
+            }
+
+            //Сделал
+            @Override
+            public void remove() {
+                int returnedElement;
+                if (this.returnedElement >= 0) {
+                    returnedElement = this.returnedElement;
+                } else {
+                    returnedElement = 0;
+                }
+
+                try {
+                    if (usedNext != 0 || usedPrevious != 0) {
+                        array[returnedElement] = null;
+                    } else {
+                        throw new IllegalStateException("You not use next() or previous() early");
+                    }
+                } catch (IllegalStateException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+
+            //Сделал
+            @Override
+            public void set(T t) {
+                int returnedElement;
+                if (this.returnedElement >= 0) {
+                    returnedElement = this.returnedElement;
+                } else {
+                    returnedElement = 0;
+                }
+                array[returnedElement] = t;
+
+            }
+
+            //Сделал
+            @Override
+            public void add(T t) {
+                currentIndex--;
+                array[currentIndex] = t;
+                currentIndex++;
+            }
+        };
     }
 
+    //Сделал
     @Override
     public List<T> subList(int fromIndex, int toIndex) {
-        return null;
+        T[] subList = Arrays.copyOfRange(array, fromIndex, toIndex);
+        return Arrays.asList(subList);
     }
-
 }
+
+
+
+
 

@@ -1,6 +1,7 @@
 package com.company;
 
-import java.util.ListIterator;
+
+import java.util.List;
 
 public class Main {
 
@@ -16,20 +17,8 @@ public class Main {
         arrayList.add(6);
         arrayList.add(7);
 
-        ListIterator listIterator = arrayList.listIterator();
-
-        listIterator.next();
-        listIterator.remove();
-
-
-
-
-
-
-
-
-
-
+        List list = arrayList.subList(0,3);
+        System.out.println(list);
 
         System.out.println("=================================================================");
 
