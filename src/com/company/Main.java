@@ -1,8 +1,6 @@
 package com.company;
 
 
-import java.util.List;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -17,8 +15,13 @@ public class Main {
         arrayList.add(6);
         arrayList.add(7);
 
-        List list = arrayList.subList(0,3);
-        System.out.println(list);
+        Integer list2[] = new Integer[arrayList.size()];
+
+        list2 = (Integer[]) arrayList.toArray(list2);
+
+        for (Integer number : list2){
+            System.out.println(number);
+        }
 
         System.out.println("=================================================================");
 

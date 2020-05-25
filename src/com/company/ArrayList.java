@@ -9,26 +9,32 @@ public class ArrayList<T> implements List<T> {
     private static final int STANDARD_SIZE = 10;
     private T[] array;
     private int index;
-    private int currentSize;
+    private int currentLength;
 
 
     public ArrayList(int i) {
         if (i == 0) {
         }
         this.array = (T[]) new Object[i];
-        this.currentSize = array.length;
+        this.currentLength = array.length;
     }
 
     public ArrayList() {
         this.array = (T[]) new Object[STANDARD_SIZE];
-        this.currentSize = array.length;
+        this.currentLength = array.length;
     }
 
 
     // Сделал.
     @Override
     public int size() {
-        return array.length;
+        int size = 0;
+        for (T i : array){
+            if (i != null){
+                size++;
+            }
+        }
+        return size;
     }
 
     // Сделал.
@@ -59,7 +65,7 @@ public class ArrayList<T> implements List<T> {
 
             @Override
             public boolean hasNext() {
-                return currentIndex < currentSize && array[currentIndex] != null;
+                return currentIndex < currentLength && array[currentIndex] != null;
             }
 
             @Override
@@ -116,9 +122,11 @@ public class ArrayList<T> implements List<T> {
         return true;
     }
 
+    //Сделал
     @Override
     public <T1> T1[] toArray(T1[] a) {
-        return null;
+        T[] copiedArray = (T[]) Arrays.copyOf(array, currentLength, a.getClass());
+        return (T1[]) copiedArray;
     }
 
     // Сделал.
@@ -201,6 +209,7 @@ public class ArrayList<T> implements List<T> {
         return lastIndex;
     }
 
+    //Сделал
     @Override
     public ListIterator<T> listIterator() {
         return new ListIterator<T>() {
@@ -212,7 +221,7 @@ public class ArrayList<T> implements List<T> {
             // Сделал
             @Override
             public boolean hasNext() {
-                return currentIndex < currentSize && array[currentIndex] != null;
+                return currentIndex < currentLength && array[currentIndex] != null;
             }
 
             // Сделал
@@ -220,7 +229,7 @@ public class ArrayList<T> implements List<T> {
             public T next() {
                 usedNext++;
                 try {
-                    if (currentIndex != currentSize) {
+                    if (currentIndex != currentLength) {
                         returnedElement++;
                         return array[currentIndex++];
                     } else {
@@ -248,7 +257,7 @@ public class ArrayList<T> implements List<T> {
             public T previous() {
                 usedPrevious++;
                 try {
-                    if (currentIndex > 0 && currentIndex != currentSize) {
+                    if (currentIndex > 0 && currentIndex != currentLength) {
                         returnedElement = currentIndex;
                         return array[currentIndex--];
                     } else {
@@ -329,7 +338,7 @@ public class ArrayList<T> implements List<T> {
 
             @Override
             public boolean hasNext() {
-                return currentIndex < currentSize && array[currentIndex] != null;
+                return currentIndex < currentLength && array[currentIndex] != null;
             }
 
             // Сделал
@@ -337,7 +346,7 @@ public class ArrayList<T> implements List<T> {
             public T next() {
                 usedNext++;
                 try {
-                    if (currentIndex != currentSize) {
+                    if (currentIndex != currentLength) {
                         returnedElement++;
                         return array[currentIndex++];
                     } else {
@@ -365,7 +374,7 @@ public class ArrayList<T> implements List<T> {
             public T previous() {
                 usedPrevious++;
                 try {
-                    if (currentIndex > 0 && currentIndex != currentSize) {
+                    if (currentIndex > 0 && currentIndex != currentLength) {
                         returnedElement = currentIndex;
                         return array[currentIndex--];
                     } else {
