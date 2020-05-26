@@ -29,8 +29,8 @@ public class ArrayList<T> implements List<T> {
     @Override
     public int size() {
         int size = 0;
-        for (T i : array){
-            if (i != null){
+        for (T i : array) {
+            if (i != null) {
                 size++;
             }
         }
@@ -54,7 +54,13 @@ public class ArrayList<T> implements List<T> {
     // Сделал.
     @Override
     public boolean contains(Object o) {
-        return indexOf(0) == 0;
+        boolean finderElement = false;
+        for (T element : array) {
+            if (element == o) {
+                finderElement = true;
+            }
+        }
+        return finderElement;
     }
 
     // Сделал
@@ -139,7 +145,7 @@ public class ArrayList<T> implements List<T> {
     // Сделал.
     @Override
     public boolean remove(Object o) {
-        return indexOf(0) == 0;
+        return indexOf(0) == 0 ;
     }
 
     @Override
@@ -147,19 +153,38 @@ public class ArrayList<T> implements List<T> {
         return false;
     }
 
+    //Сделал
     @Override
     public boolean addAll(Collection<? extends T> c) {
-        return false;
+        boolean adding = false;
+        for (Object e : c) {
+            if (add((T) e)) {
+                adding = true;
+            }
+        }
+        return adding;
+
     }
 
+    //Сделал
     @Override
     public boolean addAll(int index, Collection<? extends T> c) {
-        return false;
+        boolean adding = false;
+        for (int i = 0; i < c.size(); i++){
+            if (index == i){
+                for (Object e : c){
+                    add(i, (T) e);
+                    i++;
+                    adding = true;
+                }
+            }
+        }
+        return adding;
     }
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        return true;
+        return false;
     }
 
 
