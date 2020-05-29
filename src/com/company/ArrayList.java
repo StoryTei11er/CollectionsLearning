@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class ArrayList<T> implements List<T> {
@@ -145,12 +146,49 @@ public class ArrayList<T> implements List<T> {
     // Сделал.
     @Override
     public boolean remove(Object o) {
-        return indexOf(0) == 0 ;
+        return indexOf(0) == 0;
     }
 
+    //Сделал
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
+        boolean isContains = false;
+        for (T elementOfArray : array) {
+            for (Object elementOfC : c) {
+                if (elementOfArray == null || elementOfC == null)
+                    continue;
+                if (elementOfArray.equals(elementOfC)) {
+                    isContains = true;
+                }
+            }
+        }
+        return isContains;
+    }
+
+    //Сделал
+    @Override
+    public boolean removeAll(Collection<?> c) {
+//        Object[] filteredObjects = Arrays.stream(array)
+//                .filter(e -> !c.contains(e))
+//                .collect(Collectors.toList()).toArray();
+//        array = (T[]) filteredObjects;
+//        return false;
+
+        boolean isRemoved = false;
+
+        for (int i = 0; i < currentLength; i++) {
+            for (Object elementOfc : c) {
+                for (Object elementOfArray : array) {
+                    if (elementOfArray == null || elementOfc == null)
+                        continue;
+                    if (elementOfArray.equals(elementOfc)) {
+                        array[i] = null;
+                        isRemoved = true;
+                    }
+                }
+            }
+        }
+        return isRemoved;
     }
 
     //Сделал
@@ -170,9 +208,9 @@ public class ArrayList<T> implements List<T> {
     @Override
     public boolean addAll(int index, Collection<? extends T> c) {
         boolean adding = false;
-        for (int i = 0; i < c.size(); i++){
-            if (index == i){
-                for (Object e : c){
+        for (int i = 0; i < currentLength; i++) {
+            if (index == i) {
+                for (Object e : c) {
                     add(i, (T) e);
                     i++;
                     adding = true;
@@ -180,11 +218,6 @@ public class ArrayList<T> implements List<T> {
             }
         }
         return adding;
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> c) {
-        return false;
     }
 
 

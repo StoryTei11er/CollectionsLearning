@@ -17,27 +17,24 @@ public class Main {
         arrayList.add(6);
         arrayList.add(7);
 
-        arrayList1.add(11);
-        arrayList1.add(22);
-        arrayList1.add(33);
-        arrayList1.set(3, 44);
-        arrayList1.add(55);
-        arrayList1.add(66);
-        arrayList1.add(77);
+        arrayList1.add(1);
+        arrayList1.add(2);
+        arrayList1.add(3);
 
-        arrayList.addAll(2, arrayList1);
-        for (int i = 0; i < arrayList.size(); i++) {
-            System.out.println(arrayList.get(i));
-        }
+
+        System.out.println(arrayList.removeAll(arrayList1));
 
 
             System.out.println("=================================================================");
 
 
 
-            for (int b = 0; b < arrayList.size(); b++) {
+            for (int b = 0; b < 10; b++) {
                 System.out.println(arrayList.get(b));
             }
+        for (int b = 0; b < arrayList.size(); b++){
+            System.out.println(arrayList1.get(b) + " second array");
+        }
         }
     }
 
